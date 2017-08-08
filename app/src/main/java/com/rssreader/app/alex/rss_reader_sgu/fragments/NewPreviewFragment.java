@@ -94,6 +94,7 @@ public class NewPreviewFragment extends Fragment {
         inflater.inflate(R.menu.news_list_fragment_menu, menu);
     }
 
+
     public void reload() {
         String url = getArguments().getString("url");
         Glide.with(getActivity())
