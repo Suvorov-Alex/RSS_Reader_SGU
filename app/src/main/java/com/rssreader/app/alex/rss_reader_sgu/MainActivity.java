@@ -2,6 +2,8 @@ package com.rssreader.app.alex.rss_reader_sgu;
 
 import android.app.Fragment;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +15,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.rssreader.app.alex.rss_reader_sgu.db.SguDbContract;
+import com.rssreader.app.alex.rss_reader_sgu.db.SguDbHelper;
 import com.rssreader.app.alex.rss_reader_sgu.fragments.FavouriteNewsListFragment;
 import com.rssreader.app.alex.rss_reader_sgu.fragments.FavouriteNewsListFragmentContainer;
 import com.rssreader.app.alex.rss_reader_sgu.fragments.NewPreviewFragment;
@@ -50,8 +54,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        //startService(new Intent(this, LocationService.class));
     }
 
     @Override
@@ -79,9 +81,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         int id = item.getItemId();
-
         if (id == R.id.nav_news) {
             if (getFragmentManager().getBackStackEntryCount() > 0) {
                 getFragmentManager().popBackStackImmediate();
@@ -124,48 +124,28 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void OnArticleClicked(Article article) {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
-        }
-        //if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            NewPreviewFragment fragment = new NewPreviewFragment();
-            fragment.getArguments().putString("url", article.imageUrl);
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.container, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        /*} else {
-            NewPreviewFragment fragment = (NewPreviewFragment) getFragmentManager()
-                    .findFragmentById(R.id.new_preview_fragment);
-            fragment.getArguments().putString("url", article.imageUrl);
-            fragment.reload();
-        }*/
+        NewPreviewFragment fragment = new NewPreviewFragment();
+        fragment.getArguments().putString("url", article.imageUrl);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
     public void OnFavouriteArticleClicked(Article article) {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
-        }
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            NewPreviewFragment fragment = new NewPreviewFragment();
-            fragment.getArguments().putString("url", article.imageUrl);
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.favourite_container, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        } else {
-            NewPreviewFragment fragment = (NewPreviewFragment) getFragmentManager()
-                    .findFragmentById(R.id.new_preview_fragment);
-            fragment.getArguments().putString("url", article.imageUrl);
-            fragment.reload();
-        }
+        NewPreviewFragment fragment = new NewPreviewFragment();
+        fragment.getArguments().putString("url", article.imageUrl);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.favourite_container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
     public void onUpdateFrequencyClicked() {
         if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
+            getFragmentManager().popBackStackImmediate();
         }
         UpdateFrequencyFragment frequencyFragment = new UpdateFrequencyFragment();
         getFragmentManager().beginTransaction()

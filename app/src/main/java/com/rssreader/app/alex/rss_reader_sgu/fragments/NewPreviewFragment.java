@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,10 +20,6 @@ import com.bumptech.glide.Glide;
 import com.rssreader.app.alex.rss_reader_sgu.R;
 import com.rssreader.app.alex.rss_reader_sgu.db.SguDbContract;
 import com.rssreader.app.alex.rss_reader_sgu.db.SguDbHelper;
-
-/**
- * Created by Alex on 21.07.2017.
- */
 
 public class NewPreviewFragment extends Fragment {
 
@@ -151,6 +145,8 @@ public class NewPreviewFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        db.close();
+        if (db != null) {
+            db.close();
+        }
     }
 }

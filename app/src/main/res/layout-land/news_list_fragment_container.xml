@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,18 +11,10 @@
         android:layout_width="256dp"
         android:layout_height="match_parent" />
 
-    <!--<fragment
-        android:id="@+id/preview_fragment"
-        class="com.rssreader.app.alex.rss_reader_sgu.unused.PreviewFragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />-->
-
     <fragment
         android:id="@+id/new_preview_fragment"
         class="com.rssreader.app.alex.rss_reader_sgu.fragments.NewPreviewFragment"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
