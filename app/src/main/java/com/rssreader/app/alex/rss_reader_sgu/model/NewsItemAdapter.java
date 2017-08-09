@@ -1,7 +1,9 @@
 package com.rssreader.app.alex.rss_reader_sgu.model;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.rssreader.app.alex.rss_reader_sgu.R;
+import com.rssreader.app.alex.rss_reader_sgu.db.SguDbContract;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class NewsItemAdapter extends BaseAdapter {
@@ -42,10 +47,13 @@ public class NewsItemAdapter extends BaseAdapter {
         return position;
     }
 
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final Article art = (Article) getItem(position);
         View v;
+
 
         if (convertView == null) {
             v = inflater.inflate(R.layout.new_news_list_item, parent, false);
