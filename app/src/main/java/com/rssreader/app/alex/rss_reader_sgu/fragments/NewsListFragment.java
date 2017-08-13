@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.rssreader.app.alex.rss_reader_sgu.R;
 import com.rssreader.app.alex.rss_reader_sgu.db.SguRssLoader;
 import com.rssreader.app.alex.rss_reader_sgu.model.Article;
 import com.rssreader.app.alex.rss_reader_sgu.model.MultiItemNewsAdapter;
+import com.rssreader.app.alex.rss_reader_sgu.model.NewsItemAdapter;
 import com.rssreader.app.alex.rss_reader_sgu.service.RefreshService;
 
 import java.text.SimpleDateFormat;
@@ -38,8 +40,7 @@ public class NewsListFragment extends Fragment
 
     private final RefreshBroadcastReceiver refreshBroadcastReceiver = new RefreshBroadcastReceiver();
     private final ArrayList<Article> data = new ArrayList<>();
-    //private NewsItemAdapter dataAdapter;
-    private MultiItemNewsAdapter dataAdapter;
+    private BaseAdapter dataAdapter;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -67,8 +68,8 @@ public class NewsListFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //this.dataAdapter = new NewsItemAdapter(getActivity(), data);
-        this.dataAdapter = new MultiItemNewsAdapter(getActivity(), data);
+        this.dataAdapter = new NewsItemAdapter(getActivity(), data);
+        //this.dataAdapter = new MultiItemNewsAdapter(getActivity(), data);
         getLoaderManager().initLoader(0, null, this);
         setHasOptionsMenu(true);
     }

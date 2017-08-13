@@ -67,6 +67,9 @@ public class NewsItemAdapter extends BaseAdapter {
         holder.pubDateView.setText(art.pubDate);
         Glide.with(context)
                 .load(art.imageUrl)
+                //.error(R.drawable.sgulogo)
+                .crossFade()
+                .fitCenter()
                 .into(holder.image);
 
         return v;
@@ -74,7 +77,7 @@ public class NewsItemAdapter extends BaseAdapter {
 
     private static final class ViewHolder {
         private TextView titleView;
-        private TextView descriptionView;
+        //private TextView descriptionView;
         private TextView pubDateView;
         private ImageView image;
     }

@@ -130,6 +130,25 @@ public class MultiItemNewsAdapter extends BaseAdapter {
                 itemLayout.addView(dataView);
                 view.setTag(viewHolder);
             }
+            /*ViewHolder viewHolder = (ViewHolder) convertView.getTag();
+            if (viewHolder.pubDateView != null && article.type == 1) {
+                view = layoutInflater.inflate(R.layout.item, parent, false);
+                View dataView = layoutInflater.inflate(R.layout.type1_item, null);
+                viewHolder.titleView = (TextView) dataView.findViewById(R.id.title1);
+                LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
+                itemLayout.addView(dataView);
+                view.setTag(viewHolder);
+            } else if (viewHolder.pubDateView == null && article.type == 0) {
+                view = layoutInflater.inflate(R.layout.item, parent, false);
+                View dataView = layoutInflater.inflate(R.layout.type0_item, null);
+                viewHolder.titleView = (TextView) dataView.findViewById(R.id.title0);
+                viewHolder.pubDateView = (TextView) dataView.findViewById(R.id.postDate);
+                LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
+                itemLayout.addView(dataView);
+                view.setTag(viewHolder);
+            } else {
+                view = convertView;
+            }*/
         }
         ViewHolder viewHolder = (ViewHolder) view.getTag();
 

@@ -147,6 +147,9 @@ public class MainActivity extends AppCompatActivity
     public void OnFavouriteArticleClicked(Article article) {
         NewPreviewFragment fragment = new NewPreviewFragment();
         fragment.getArguments().putString("url", article.imageUrl);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            fragment.getArguments().putBoolean("delMenu", true);
+        }
         getFragmentManager().beginTransaction()
                 .replace(R.id.favourite_container, fragment)
                 .addToBackStack(null)
