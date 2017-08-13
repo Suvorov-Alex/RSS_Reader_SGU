@@ -1,6 +1,5 @@
-package com.rssreader.app.alex.rss_reader_sgu.Location;
+package com.rssreader.app.alex.rss_reader_sgu.location;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.LocationListener;
 import android.location.LocationManager;

@@ -2,6 +2,7 @@ package com.rssreader.app.alex.rss_reader_sgu.model;
 
 import android.content.Context;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +12,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rssreader.app.alex.rss_reader_sgu.R;
-
-import org.w3c.dom.Text;
+import com.rssreader.app.alex.rss_reader_sgu.fragments.PrefsFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
+
+import butterknife.BindView;
 
 /**
  * Created by Alex on 09.08.2017.
@@ -53,18 +55,15 @@ public class MultiNewsItemAdapter extends BaseAdapter {
     }
 
     private String formatData(String data) {
-        Log.d("DateTag", data);
         String day = new SimpleDateFormat("d").format(new Date());
-
         String[] splitPubDate = data.split(" |:|-");
-        Log.d("DateTag", Arrays.toString(splitPubDate));
         String articleDate = splitPubDate[2];
         if (articleDate.charAt(0) == '0') {
             articleDate = String.valueOf(articleDate.charAt(1));
         }
         int d = Integer.parseInt(day);
         int ad = Integer.parseInt(articleDate);
-
+        //d++;
         Log.d("DateTag", String.valueOf(d) + " " + ad);
         int difference = d - ad;
         if (difference < 0) {
@@ -99,55 +98,94 @@ public class MultiNewsItemAdapter extends BaseAdapter {
         return result;
     }
 
-    @Override
+    /*@Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Article article = (Article) getItem(position);
-
+        Article article = (Article) getItem(position);
         View view;
-
         if (convertView == null) {
-            View dataView = layoutInflater.inflate(R.layout.data_subitem, null);
-            view = layoutInflater.inflate(R.layout.item, parent, false);
-
-            ViewHolder holder = new ViewHolder();
-            holder.pubDateView = (TextView) dataView.findViewById(R.id.pubDateTV);
-            holder.titleView = (TextView) dataView.findViewById(R.id.titleTV);
-            view.setTag(holder);
-
-            LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
-            if (dataView.getParent() != null) {
-                ((ViewGroup) dataView.getParent()).removeView(dataView);
+            ViewHolder viewHolder = new ViewHolder();
+            if (article.type == 0) {
+                view = layoutInflater.inflate(R.layout.type0_item, null);
+                viewHolder.titleView = (TextView) view.findViewById(R.id.title0);
+                viewHolder.pubDateView = (TextView) view.findViewById(R.id.postDate);
+            } else {
+                view = layoutInflater.inflate(R.layout.type1_item, null);
+                viewHolder.titleView = (TextView) view.findViewById(R.id.title1);
             }
-            itemLayout.addView(dataView);
+            view.setTag(viewHolder);
         } else {
             view = convertView;
         }
+        ViewHolder viewHolder = (ViewHolder) view.getTag();
 
-        ViewHolder holder = (ViewHolder) view.getTag();
-        holder.pubDateView.setText(formatData(article.pubDate));
-        //holder.pubDateView.setText(article.pubDate);
-        holder.titleView.setText(article.title);
+        if (article.type == 0) {
+            viewHolder.pubDateView.setText(formatData(article.pubDate));
+            viewHolder.titleView.setText(article.title);
+        } else {
+            viewHolder.titleView.setText(article.title);
+        }
 
+        return view;
+    }*/
 
-
-       /* for (int i = 0; i < new Random().nextInt(10); i++){
-            View newsView = layoutInflater.inflate(R.layout.news_subitem, null);
-
-            if (newsView.getParent() != null){
-                ((ViewGroup) newsView.getParent()).removeView(newsView);
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        Article article = (Article) getItem(position);
+        View view;
+        if (convertView == null) {
+            ViewHolder viewHolder = new ViewHolder();
+            view = layoutInflater.inflate(R.layout.item, parent, false);
+            LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
+            View dataView;
+            if (article.type == 0) {
+                dataView = layoutInflater.inflate(R.layout.type0_item, null);
+                viewHolder.titleView = (TextView) dataView.findViewById(R.id.title0);
+                viewHolder.pubDateView = (TextView) dataView.findViewById(R.id.postDate);
+            } else {
+                dataView = layoutInflater.inflate(R.layout.type1_item, null);
+                viewHolder.titleView = (TextView) dataView.findViewById(R.id.title1);
             }
+            itemLayout.addView(dataView);
+            view.setTag(viewHolder);
+        } else {
+            ViewHolder viewHolder = (ViewHolder) convertView.getTag();
+            if (viewHolder.pubDateView != null && article.type == 0 ||
+                    viewHolder.pubDateView == null && article.type == 1) {
+                view = convertView;
+            } else if (viewHolder.pubDateView != null && article.type == 1) {
+                view = layoutInflater.inflate(R.layout.item, parent, false);
+                View dataView = layoutInflater.inflate(R.layout.type1_item, null);
+                viewHolder.titleView = (TextView) dataView.findViewById(R.id.title1);
+                LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
+                itemLayout.addView(dataView);
+                view.setTag(viewHolder);
+            } else {
+                view = layoutInflater.inflate(R.layout.item, parent, false);
+                View dataView = layoutInflater.inflate(R.layout.type0_item, null);
+                viewHolder.titleView = (TextView) dataView.findViewById(R.id.title0);
+                viewHolder.pubDateView = (TextView) dataView.findViewById(R.id.postDate);
+                LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
+                itemLayout.addView(dataView);
+                view.setTag(viewHolder);
+            }
+        }
+        ViewHolder viewHolder = (ViewHolder) view.getTag();
 
-            itemLayout.addView(newsView);
-        }*/
-
+        if (article.type == 0) {
+            viewHolder.pubDateView.setText(formatData(article.pubDate));
+            viewHolder.titleView.setText(article.title);
+        } else {
+            viewHolder.titleView.setText(article.title);
+        }
 
         return view;
     }
 
+
     private static final class ViewHolder {
         private TextView titleView;
-        private TextView descriptionView;
         private TextView pubDateView;
-        private ImageView image;
     }
 }
+
+

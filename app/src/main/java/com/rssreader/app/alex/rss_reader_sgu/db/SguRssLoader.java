@@ -42,7 +42,8 @@ final public class SguRssLoader extends AsyncTaskLoader<List<Article>> {
                 SguDbContract.COLUMN_PUBDATE,
                 SguDbContract.COLUMN_LINK,
                 SguDbContract.COLUMN_FAVOURITE,
-                SguDbContract.COLUMN_IMAGE_URL
+                SguDbContract.COLUMN_IMAGE_URL,
+                SguDbContract.COLUMN_GUID
         }, null, null, null, null, SguDbContract.COLUMN_PUBDATE + " DESC");
         try {
             res = new ArrayList<>();
@@ -54,6 +55,7 @@ final public class SguRssLoader extends AsyncTaskLoader<List<Article>> {
                 article.link = cursor.getString(3);
                 article.favourite = cursor.getInt(4);
                 article.imageUrl = cursor.getString(5);
+                article.guid = cursor.getLong(6);
 
                 res.add(article);
             }

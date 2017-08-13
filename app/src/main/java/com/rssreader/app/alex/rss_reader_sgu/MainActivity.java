@@ -68,6 +68,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStackImmediate();
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;

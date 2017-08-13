@@ -10,4 +10,6 @@ public final class Article {
 
     public String imageUrl;
     public int favourite;
+
+    public int type;
 }

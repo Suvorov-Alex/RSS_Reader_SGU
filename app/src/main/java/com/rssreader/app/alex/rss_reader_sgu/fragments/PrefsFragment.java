@@ -6,12 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,10 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.rssreader.app.alex.rss_reader_sgu.Location.Location;
-import com.rssreader.app.alex.rss_reader_sgu.MainActivity;
+import com.rssreader.app.alex.rss_reader_sgu.location.Location;
 import com.rssreader.app.alex.rss_reader_sgu.R;
-import com.rssreader.app.alex.rss_reader_sgu.SplashActivity;
 
 public class PrefsFragment extends Fragment {
 
