@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -19,20 +18,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.database.DatabaseUtils;
 
 import com.rssreader.app.alex.rss_reader_sgu.R;
 import com.rssreader.app.alex.rss_reader_sgu.db.FavouriteNewsLoader;
-import com.rssreader.app.alex.rss_reader_sgu.db.SguDbContract;
-import com.rssreader.app.alex.rss_reader_sgu.db.SguDbHelper;
 import com.rssreader.app.alex.rss_reader_sgu.model.Article;
 import com.rssreader.app.alex.rss_reader_sgu.model.NewsItemAdapter;
 import com.rssreader.app.alex.rss_reader_sgu.service.RefreshService;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Alex on 21.07.2017.

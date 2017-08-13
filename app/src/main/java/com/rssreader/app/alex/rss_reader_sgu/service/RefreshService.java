@@ -15,10 +15,10 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 
-import com.rssreader.app.alex.rss_reader_sgu.fragments.NewsListFragmentContainer;
 import com.rssreader.app.alex.rss_reader_sgu.R;
 import com.rssreader.app.alex.rss_reader_sgu.db.SguDbContract;
 import com.rssreader.app.alex.rss_reader_sgu.db.SguDbHelper;
+import com.rssreader.app.alex.rss_reader_sgu.fragments.NewsListFragmentContainer;
 import com.rssreader.app.alex.rss_reader_sgu.model.Article;
 import com.rssreader.app.alex.rss_reader_sgu.utils.NetUtils;
 import com.rssreader.app.alex.rss_reader_sgu.utils.RssUtils;

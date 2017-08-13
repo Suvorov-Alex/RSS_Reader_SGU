@@ -23,18 +23,13 @@ import android.widget.Toast;
 import com.rssreader.app.alex.rss_reader_sgu.R;
 import com.rssreader.app.alex.rss_reader_sgu.db.SguRssLoader;
 import com.rssreader.app.alex.rss_reader_sgu.model.Article;
-import com.rssreader.app.alex.rss_reader_sgu.model.MultiNewsItemAdapter;
-import com.rssreader.app.alex.rss_reader_sgu.model.NewsItemAdapter;
+import com.rssreader.app.alex.rss_reader_sgu.model.MultiItemNewsAdapter;
 import com.rssreader.app.alex.rss_reader_sgu.service.RefreshService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class NewsListFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<List<Article>> {
@@ -44,7 +39,7 @@ public class NewsListFragment extends Fragment
     private final RefreshBroadcastReceiver refreshBroadcastReceiver = new RefreshBroadcastReceiver();
     private final ArrayList<Article> data = new ArrayList<>();
     //private NewsItemAdapter dataAdapter;
-    private MultiNewsItemAdapter dataAdapter;
+    private MultiItemNewsAdapter dataAdapter;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -73,7 +68,7 @@ public class NewsListFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //this.dataAdapter = new NewsItemAdapter(getActivity(), data);
-        this.dataAdapter = new MultiNewsItemAdapter(getActivity(), data);
+        this.dataAdapter = new MultiItemNewsAdapter(getActivity(), data);
         getLoaderManager().initLoader(0, null, this);
         setHasOptionsMenu(true);
     }
@@ -142,7 +137,7 @@ public class NewsListFragment extends Fragment
         }
         int d = Integer.parseInt(day);
         int ad = Integer.parseInt(articleDate);
-        //d++;
+        d++;
         Log.d("DateTag", String.valueOf(d) + " " + ad);
         int difference = d - ad;
         if (difference < 0) {

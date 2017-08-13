@@ -1,9 +1,6 @@
 package com.rssreader.app.alex.rss_reader_sgu.model;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.rssreader.app.alex.rss_reader_sgu.R;
-import com.rssreader.app.alex.rss_reader_sgu.db.SguDbContract;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class NewsItemAdapter extends BaseAdapter {

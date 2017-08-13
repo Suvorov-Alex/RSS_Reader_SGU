@@ -22,8 +22,10 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 tools:listitem="@layout/news_list_item"
-                android:divider="#CFD8DC"
-                android:dividerHeight="1dp"/>
+                android:divider="@null" />
+
+            <!--android:divider="#CFD8DC"
+            android:dividerHeight="1dp"-->
 
         </android.support.v4.widget.SwipeRefreshLayout>
 

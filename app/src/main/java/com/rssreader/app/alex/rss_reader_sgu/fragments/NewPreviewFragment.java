@@ -49,10 +49,17 @@ public class NewPreviewFragment extends Fragment {
 
         loadData();
 
-        setHasOptionsMenu(true);
+        if (getArguments().getBoolean("delMenu")) {
+            setHasOptionsMenu(false);
+            getArguments().putBoolean("delMenu", false);
+        } else {
+            setHasOptionsMenu(true);
+        }
 
         return v;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

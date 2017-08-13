@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.rssreader.app.alex.rss_reader_sgu.R;
 import com.rssreader.app.alex.rss_reader_sgu.service.RefreshService;

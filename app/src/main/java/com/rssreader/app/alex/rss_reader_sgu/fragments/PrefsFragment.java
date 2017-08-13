@@ -18,8 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.rssreader.app.alex.rss_reader_sgu.location.Location;
 import com.rssreader.app.alex.rss_reader_sgu.R;
+import com.rssreader.app.alex.rss_reader_sgu.location.Location;
 
 public class PrefsFragment extends Fragment {
 

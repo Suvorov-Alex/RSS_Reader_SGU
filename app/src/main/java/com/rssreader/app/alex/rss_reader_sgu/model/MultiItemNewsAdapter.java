@@ -2,38 +2,30 @@ package com.rssreader.app.alex.rss_reader_sgu.model;
 
 import android.content.Context;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rssreader.app.alex.rss_reader_sgu.R;
-import com.rssreader.app.alex.rss_reader_sgu.fragments.PrefsFragment;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
-import butterknife.BindView;
 
 /**
  * Created by Alex on 09.08.2017.
  */
 
-public class MultiNewsItemAdapter extends BaseAdapter {
+public class MultiItemNewsAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
     private List<Article> data;
 
-    public MultiNewsItemAdapter(Context context, List<Article> data) {
+    public MultiItemNewsAdapter(Context context, List<Article> data) {
         this.context = context;
         this.data = data;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -63,7 +55,7 @@ public class MultiNewsItemAdapter extends BaseAdapter {
         }
         int d = Integer.parseInt(day);
         int ad = Integer.parseInt(articleDate);
-        //d++;
+        d++;
         Log.d("DateTag", String.valueOf(d) + " " + ad);
         int difference = d - ad;
         if (difference < 0) {
@@ -97,36 +89,6 @@ public class MultiNewsItemAdapter extends BaseAdapter {
 
         return result;
     }
-
-    /*@Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Article article = (Article) getItem(position);
-        View view;
-        if (convertView == null) {
-            ViewHolder viewHolder = new ViewHolder();
-            if (article.type == 0) {
-                view = layoutInflater.inflate(R.layout.type0_item, null);
-                viewHolder.titleView = (TextView) view.findViewById(R.id.title0);
-                viewHolder.pubDateView = (TextView) view.findViewById(R.id.postDate);
-            } else {
-                view = layoutInflater.inflate(R.layout.type1_item, null);
-                viewHolder.titleView = (TextView) view.findViewById(R.id.title1);
-            }
-            view.setTag(viewHolder);
-        } else {
-            view = convertView;
-        }
-        ViewHolder viewHolder = (ViewHolder) view.getTag();
-
-        if (article.type == 0) {
-            viewHolder.pubDateView.setText(formatData(article.pubDate));
-            viewHolder.titleView.setText(article.title);
-        } else {
-            viewHolder.titleView.setText(article.title);
-        }
-
-        return view;
-    }*/
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
