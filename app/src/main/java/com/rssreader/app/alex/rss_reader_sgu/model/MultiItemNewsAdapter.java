@@ -1,7 +1,6 @@
 package com.rssreader.app.alex.rss_reader_sgu.model;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.rssreader.app.alex.rss_reader_sgu.R;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -46,48 +44,42 @@ public class MultiItemNewsAdapter extends BaseAdapter {
         return position;
     }
 
-    private String formatData(String data) {
-        String day = new SimpleDateFormat("d").format(new Date());
-        String[] splitPubDate = data.split(" |:|-");
-        String articleDate = splitPubDate[2];
-        if (articleDate.charAt(0) == '0') {
-            articleDate = String.valueOf(articleDate.charAt(1));
-        }
-        int d = Integer.parseInt(day);
-        int ad = Integer.parseInt(articleDate);
-        d++;
-        Log.d("DateTag", String.valueOf(d) + " " + ad);
-        int difference = d - ad;
-        if (difference < 0) {
-            if (splitPubDate[1].equals("01") ||
-                    splitPubDate[1].equals("03") ||
-                    splitPubDate[1].equals("05") ||
-                    splitPubDate[1].equals("07") ||
-                    splitPubDate[1].equals("08") ||
-                    splitPubDate[1].equals("10") ||
-                    splitPubDate[1].equals("12")) {
-                difference += 31;
-            } else if (splitPubDate[1].equals("02")) {
-                difference += 28;
+    private String formatDateToDays(Date date) {
+        long curTime = System.currentTimeMillis();
+        Date curDate = new Date(curTime);
+        Date tomorrowDate = new Date(curTime - 86400000);
+
+        if (curDate.getMonth() == date.getMonth() && curDate.getDate() == date.getDate()) {
+            return "Today";
+        } else if (tomorrowDate.getMonth() == date.getMonth()
+                && tomorrowDate.getDate() == date.getDate()) {
+            return "Tomorrow";
+        } else {
+            if (curDate.getMonth() == date.getMonth()) {
+                return (curDate.getDate() - date.getDate() + 1) + " Days ago";
             } else {
-                difference += 30;
+                int month = curDate.getMonth() + 1;
+                if (month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+                    return (curDate.getDate() - date.getDate() + 32) + " Days ago";
+                } else if (month == 2) {
+                    return (curDate.getDate() - date.getDate() + 29) + " Days ago";
+                } else {
+                    return (curDate.getDate() - date.getDate() + 31) + " Days ago";
+                }
             }
         }
-        Log.d("DateTag", String.valueOf(difference));
-        String result;
-        switch (difference) {
-            case 0:
-                result = "Today";
-                break;
-            case 1:
-                result = "Yesterday";
-                break;
-            default:
-                result = difference + " Days ago";
-                break;
-        }
+    }
 
-        return result;
+    private String formatDate(Date date) {
+        String[] months = {"Jan.", "Feb.", "Mar.", "Apr.", "May", "Ju.", "Jul.", "Aug.", "Sept.",
+                "Oct.", "Nov.", "Dec."};
+
+        String[] days = {"Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat.", "Sun."};
+
+        return date.getDate() + ", "
+                + months[date.getMonth() + 1]
+                + " " + days[date.getDay()] + " "
+                + (date.getYear() - 100 + 2000);
     }
 
     @Override
@@ -118,13 +110,17 @@ public class MultiItemNewsAdapter extends BaseAdapter {
         switch (type) {
             case TYPE_NEWS:
                 TextView title = (TextView) convertView.findViewById(R.id.newsTitle);
+                TextView pubDate = (TextView) convertView.findViewById(R.id.pubDateTV);
                 ImageView image = (ImageView) convertView.findViewById(R.id.holder_image);
+
                 if (title == null) {
                     convertView = layoutInflater.inflate(R.layout.type0_item, parent, false);
                     title = (TextView) convertView.findViewById(R.id.newsTitle);
+                    pubDate = (TextView) convertView.findViewById(R.id.pubDateTV);
                     image = (ImageView) convertView.findViewById(R.id.holder_image);
                 }
                 title.setText(article.title);
+                pubDate.setText(formatDate(article.pubDate));
                 Glide.with(context)
                         .load(article.imageUrl)
                         //.error(R.drawable.sgulogo)
@@ -138,17 +134,11 @@ public class MultiItemNewsAdapter extends BaseAdapter {
                     convertView = layoutInflater.inflate(R.layout.type1_item, parent, false);
                     postDate = (TextView) convertView.findViewById(R.id.postDate);
                 }
-                postDate.setText(article.pubDate.toString());
+                postDate.setText(formatDateToDays(article.pubDate));
                 break;
         }
 
         return convertView;
-    }
-
-
-    private static final class ViewHolder {
-        private TextView titleView;
-        private TextView pubDateView;
     }
 }
 

@@ -116,6 +116,8 @@ public class RefreshService extends Service {
                     cv.put(SguDbContract.COLUMN_LINK, a.link);
                     //cv.put(SguDbContract.COLUMN_PUBDATE, a.pubDate);
                     cv.put(SguDbContract.COLUMN_PUBDATE, a.pubDate.getTime());
+                    Log.d("timelog", "RefreshService " + a.pubDate);
+                    Log.d("timelog", "RefreshService " + a.pubDate.getTime());
                     cv.put(SguDbContract.COLUMN_FAVOURITE, a.favourite);
                     cv.put(SguDbContract.COLUMN_IMAGE_URL, a.imageUrl);
                     long insertedId = db.insertWithOnConflict(SguDbContract.TABLE_NAME,

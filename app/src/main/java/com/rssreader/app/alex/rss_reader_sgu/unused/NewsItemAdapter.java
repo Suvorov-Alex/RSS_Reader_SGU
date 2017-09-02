@@ -1,4 +1,4 @@
-package com.rssreader.app.alex.rss_reader_sgu.model;
+package com.rssreader.app.alex.rss_reader_sgu.unused;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.rssreader.app.alex.rss_reader_sgu.R;
+import com.rssreader.app.alex.rss_reader_sgu.model.Article;
 
 import java.util.List;
 

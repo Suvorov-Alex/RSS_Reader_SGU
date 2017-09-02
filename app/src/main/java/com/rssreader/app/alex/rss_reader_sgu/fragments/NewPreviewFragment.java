@@ -4,7 +4,9 @@ import android.app.Fragment;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import java.text.SimpleDateFormat;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import com.rssreader.app.alex.rss_reader_sgu.db.SguDbContract;
 import com.rssreader.app.alex.rss_reader_sgu.db.SguDbHelper;
 
 import java.text.ParseException;
+import java.util.Date;
 
 public class NewPreviewFragment extends Fragment {
 
@@ -110,6 +113,18 @@ public class NewPreviewFragment extends Fragment {
                 .into(imageView);
     }
 
+    private String formatDate(Date date) {
+        String[] months = {"Jan.", "Feb.", "Mar.", "Apr.", "May", "Ju.", "Jul.", "Aug.", "Sept.",
+                "Oct.", "Nov.", "Dec."};
+
+        String[] days = {"Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat.", "Sun."};
+
+        return date.getDate() + ", "
+                + months[date.getMonth() + 1]
+                + " " + days[date.getDay()] + " "
+                + (date.getYear() - 100 + 2000);
+    }
+
     private void loadData() {
         Cursor cursor = db.query(SguDbContract.TABLE_NAME, new String[]{
                 SguDbContract.COLUMN_TITLE,
@@ -126,33 +141,13 @@ public class NewPreviewFragment extends Fragment {
                         cursor.getColumnIndex(SguDbContract.COLUMN_TITLE)));
                 descriptionTextView.setText(cursor.getString(
                         cursor.getColumnIndex(SguDbContract.COLUMN_DESCRIPTION)));
-                //descriptionTextView.setMovementMethod(new ScrollingMovementMethod());
-                //String[] formatMonth = formatMonth(cursor);
-                try {
-                    pubDateTextView.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(cursor.getString(
-                            cursor.getColumnIndex(SguDbContract.COLUMN_PUBDATE))).toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                pubDateTextView.setText(formatDate(new Date(cursor.getLong(
+                        cursor.getColumnIndex(SguDbContract.COLUMN_PUBDATE)))));
             }
         }
 
         reload();
         cursor.close();
-    }
-
-    private String[] formatMonth(Cursor cursor) {
-        String[] months = {"January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"};
-        String pubDate = cursor.getString(
-                cursor.getColumnIndex(SguDbContract.COLUMN_PUBDATE));
-        String[] splitPubDate = pubDate.split(" |:|-");
-        String month = splitPubDate[1];
-        if (month.charAt(0) == '0') {
-            month = String.valueOf((month.charAt(1)));
-        }
-        int monthInt = Integer.parseInt(month);
-        return new String[]{months[monthInt - 1], splitPubDate[2], splitPubDate[0]};
     }
 
     @Override

@@ -127,6 +127,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void OnArticleClicked(Article article) {
+        if (article.description == null) {
+            return;
+        }
         NewPreviewFragment fragment = new NewPreviewFragment();
         fragment.getArguments().putString("url", article.imageUrl);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -140,6 +143,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void OnFavouriteArticleClicked(Article article) {
+        if (article.description == null) {
+            return;
+        }
         NewPreviewFragment fragment = new NewPreviewFragment();
         fragment.getArguments().putString("url", article.imageUrl);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {

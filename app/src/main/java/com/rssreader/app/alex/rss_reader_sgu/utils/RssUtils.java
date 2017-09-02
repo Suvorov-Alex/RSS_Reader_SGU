@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class RssUtils {
-
     public static List<Article> parseRss(String rss) throws XmlPullParserException, IOException {
         final ArrayList<Article> res = new ArrayList<>();
         final XmlPullParser parser = Xml.newPullParser();
@@ -48,14 +47,15 @@ public final class RssUtils {
                         article.description = parser.nextText();
                     } else if ("pubDate".equals(itemEntry)) {
                         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String dateString = parser.nextText();
                         //DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                         try {
-                            article.pubDate = format.parse(parser.nextText());
+                            article.pubDate = format.parse(dateString);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
                         //Log.d("timelog1", dateString);
-                        Log.d("timelog2", article.pubDate.toString());
+                        Log.d("timelog", "RssUtils " + article.pubDate.toString());
                     } else if ("link".equals(itemEntry)) {
                         article.link = parser.nextText();
                     } else if ("enclosure".equals(itemEntry)) {

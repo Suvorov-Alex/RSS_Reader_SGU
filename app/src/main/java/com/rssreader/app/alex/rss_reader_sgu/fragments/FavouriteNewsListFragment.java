@@ -63,7 +63,6 @@ public class FavouriteNewsListFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //this.dataAdapter = new NewsItemAdapter(getActivity(), data);
         this.dataAdapter = new MultiItemNewsAdapter(getActivity(), data);
         getLoaderManager().initLoader(0, null, this);
         setHasOptionsMenu(true);
