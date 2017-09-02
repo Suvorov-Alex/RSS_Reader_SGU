@@ -23,7 +23,6 @@ public class SguDbHelper extends SQLiteOpenHelper {
                 + SguDbContract.COLUMN_LINK + " TEXT NOT NULL, "
                 + SguDbContract.COLUMN_IMAGE_URL + " TEXT, "
                 + SguDbContract.COLUMN_FAVOURITE + " INTEGER, "
-                //+ SguDbContract.COLUMN_PUBDATE + " DATETIME"
                 + SguDbContract.COLUMN_PUBDATE + " INTEGER"
                 + ")";
         db.execSQL(sql);

@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 final public class FavouriteNewsLoader extends AsyncTaskLoader<List<Article>> {
+    private static final String URL = "http://www.sgu.ru/news.xml";
     private static final String LOG_TAG = "SguRssLoader";
 
     private List<Article> data;
@@ -63,6 +64,7 @@ final public class FavouriteNewsLoader extends AsyncTaskLoader<List<Article>> {
             cursor.close();
             db.close();
         }
+
         List<Date> days = new ArrayList<>();
         for (int i = 0; i < res.size(); i++) {
             boolean isAlreadyAdded = false;

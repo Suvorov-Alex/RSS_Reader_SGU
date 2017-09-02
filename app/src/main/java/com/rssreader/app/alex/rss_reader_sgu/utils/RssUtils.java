@@ -48,14 +48,11 @@ public final class RssUtils {
                     } else if ("pubDate".equals(itemEntry)) {
                         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         String dateString = parser.nextText();
-                        //DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                         try {
                             article.pubDate = format.parse(dateString);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        //Log.d("timelog1", dateString);
-                        Log.d("timelog", "RssUtils " + article.pubDate.toString());
                     } else if ("link".equals(itemEntry)) {
                         article.link = parser.nextText();
                     } else if ("enclosure".equals(itemEntry)) {

@@ -43,7 +43,6 @@ public class NewsItemAdapter extends BaseAdapter {
     }
 
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final Article art = (Article) getItem(position);

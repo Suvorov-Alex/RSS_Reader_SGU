@@ -50,14 +50,8 @@ final public class SguRssLoader extends AsyncTaskLoader<List<Article>> {
                 Article article = new Article();
                 article.title = cursor.getString(0);
                 article.description = cursor.getString(1);
-
-                //article.pubDate = cursor.getString(2);
-
                 long intDate = cursor.getLong(2);
-                Log.d("timelog", "SguRssLoader " + intDate);
                 article.pubDate = new Date(intDate);
-                Log.d("timelog", "SguRssLoader " + article.pubDate.toString());
-
                 article.link = cursor.getString(3);
                 article.favourite = cursor.getInt(4);
                 article.imageUrl = cursor.getString(5);
