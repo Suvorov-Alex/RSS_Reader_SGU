@@ -2,25 +2,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="20dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="20dp"
-    android:background="#c4cfda"
+    android:background="@drawable/style_frame"
     android:orientation="vertical"
-    android:paddingBottom="5dp"
-    android:paddingTop="5dp">
+    android:paddingBottom="1dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="1dp"
+    android:weightSum="1">
 
-    <TextView
-        android:id="@+id/postDate"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="62dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/title0"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        <LinearLayout
+            android:layout_width="197dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/newsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif"
+                android:maxLines="2"
+                android:paddingTop="7dp"
+                android:text="В СГУ прошла Всемирная акция «Тотальный диктант»"
+                android:textAlignment="center"
+                android:textColor="#DB000000"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <ImageView
+                android:id="@+id/holder_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sgulogo" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.rssreader.app.alex.rss_reader_sgu.R;
 
 import java.text.SimpleDateFormat;
@@ -20,6 +22,9 @@ import java.util.List;
  */
 
 public class MultiItemNewsAdapter extends BaseAdapter {
+
+    private static final int TYPE_NEWS = 0;
+    private static final int TYPE_HEADER = 1;
 
     private Context context;
     private LayoutInflater layoutInflater;
@@ -91,75 +96,58 @@ public class MultiItemNewsAdapter extends BaseAdapter {
     }
 
     @Override
+    public int getItemViewType(int position) {
+        Article article = (Article) getItem(position);
+        if (article.type == 0) {
+            return TYPE_NEWS;
+        }
+
+        return TYPE_HEADER;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Article article = (Article) getItem(position);
-        View view;
+        int type = getItemViewType(position);
         if (convertView == null) {
-            ViewHolder viewHolder = new ViewHolder();
-            view = layoutInflater.inflate(R.layout.item, parent, false);
-            LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
-            View dataView;
-            if (article.type == 0) {
-                dataView = layoutInflater.inflate(R.layout.type0_item, null);
-                viewHolder.titleView = (TextView) dataView.findViewById(R.id.title0);
-                viewHolder.pubDateView = (TextView) dataView.findViewById(R.id.postDate);
-            } else {
-                dataView = layoutInflater.inflate(R.layout.type1_item, null);
-                viewHolder.titleView = (TextView) dataView.findViewById(R.id.title1);
+            switch (type) {
+                case TYPE_NEWS:
+                    convertView = layoutInflater.inflate(R.layout.type0_item, parent, false);
+                    break;
+                case TYPE_HEADER:
+                    convertView = layoutInflater.inflate(R.layout.type1_item, parent, false);
+                    break;
             }
-            itemLayout.addView(dataView);
-            view.setTag(viewHolder);
-        } else {
-            ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-            if (viewHolder.pubDateView != null && article.type == 0 ||
-                    viewHolder.pubDateView == null && article.type == 1) {
-                view = convertView;
-            } else if (viewHolder.pubDateView != null && article.type == 1) {
-                view = layoutInflater.inflate(R.layout.item, parent, false);
-                View dataView = layoutInflater.inflate(R.layout.type1_item, null);
-                viewHolder.titleView = (TextView) dataView.findViewById(R.id.title1);
-                LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
-                itemLayout.addView(dataView);
-                view.setTag(viewHolder);
-            } else {
-                view = layoutInflater.inflate(R.layout.item, parent, false);
-                View dataView = layoutInflater.inflate(R.layout.type0_item, null);
-                viewHolder.titleView = (TextView) dataView.findViewById(R.id.title0);
-                viewHolder.pubDateView = (TextView) dataView.findViewById(R.id.postDate);
-                LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
-                itemLayout.addView(dataView);
-                view.setTag(viewHolder);
-            }
-            /*ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-            if (viewHolder.pubDateView != null && article.type == 1) {
-                view = layoutInflater.inflate(R.layout.item, parent, false);
-                View dataView = layoutInflater.inflate(R.layout.type1_item, null);
-                viewHolder.titleView = (TextView) dataView.findViewById(R.id.title1);
-                LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
-                itemLayout.addView(dataView);
-                view.setTag(viewHolder);
-            } else if (viewHolder.pubDateView == null && article.type == 0) {
-                view = layoutInflater.inflate(R.layout.item, parent, false);
-                View dataView = layoutInflater.inflate(R.layout.type0_item, null);
-                viewHolder.titleView = (TextView) dataView.findViewById(R.id.title0);
-                viewHolder.pubDateView = (TextView) dataView.findViewById(R.id.postDate);
-                LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
-                itemLayout.addView(dataView);
-                view.setTag(viewHolder);
-            } else {
-                view = convertView;
-            }*/
-        }
-        ViewHolder viewHolder = (ViewHolder) view.getTag();
-
-        if (article.type == 0) {
-            viewHolder.pubDateView.setText(formatData(article.pubDate));
-            viewHolder.titleView.setText(article.title);
-        } else {
-            viewHolder.titleView.setText(article.title);
         }
 
-        return view;
+        switch (type) {
+            case TYPE_NEWS:
+                TextView title = (TextView) convertView.findViewById(R.id.newsTitle);
+                ImageView image = (ImageView) convertView.findViewById(R.id.holder_image);
+                if (title == null) {
+                    convertView = layoutInflater.inflate(R.layout.type0_item, parent, false);
+                    title = (TextView) convertView.findViewById(R.id.newsTitle);
+                    image = (ImageView) convertView.findViewById(R.id.holder_image);
+                }
+                title.setText(article.title);
+                Glide.with(context)
+                        .load(article.imageUrl)
+                        //.error(R.drawable.sgulogo)
+                        .crossFade()
+                        .fitCenter()
+                        .into(image);
+                break;
+            case TYPE_HEADER:
+                TextView postDate = (TextView) convertView.findViewById(R.id.postDate);
+                if (postDate == null) {
+                    convertView = layoutInflater.inflate(R.layout.type1_item, parent, false);
+                    postDate = (TextView) convertView.findViewById(R.id.postDate);
+                }
+                postDate.setText(article.pubDate.toString());
+                break;
+        }
+
+        return convertView;
     }
 
 

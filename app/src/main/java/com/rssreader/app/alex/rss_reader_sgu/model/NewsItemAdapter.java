@@ -64,7 +64,7 @@ public class NewsItemAdapter extends BaseAdapter {
         ViewHolder holder = (ViewHolder) v.getTag();
         holder.titleView.setText(art.title);
         //holder.descriptionView.setText(art.description);
-        holder.pubDateView.setText(art.pubDate);
+        holder.pubDateView.setText(art.pubDate.toString());
         Glide.with(context)
                 .load(art.imageUrl)
                 //.error(R.drawable.sgulogo)

@@ -10,6 +10,10 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,12 +48,20 @@ public final class RssUtils {
                     } else if ("description".equals(itemEntry)) {
                         article.description = parser.nextText();
                     } else if ("pubDate".equals(itemEntry)) {
-                        article.pubDate = parser.nextText();
+                        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        //DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        try {
+                            article.pubDate = format.parse(parser.nextText());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        //Log.d("timelog1", dateString);
+                        Log.d("timelog2", article.pubDate.toString());
                     } else if ("link".equals(itemEntry)) {
                         article.link = parser.nextText();
                     } else if ("enclosure".equals(itemEntry)) {
                         article.imageUrl = parser.getAttributeValue(0);
-                        String string = parser.nextText(); // DO NOT REMOVE!!!!!!!!
+                        String string = parser.nextText(); // DO NOT REMOVE!
                         // skips next text in tag enclosure
                     } else {
                         skipTag(parser);

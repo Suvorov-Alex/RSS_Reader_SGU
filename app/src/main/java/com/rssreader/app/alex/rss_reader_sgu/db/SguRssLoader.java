@@ -6,11 +6,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.util.Pair;
 
 import com.rssreader.app.alex.rss_reader_sgu.model.Article;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 final public class SguRssLoader extends AsyncTaskLoader<List<Article>> {
 
@@ -51,11 +54,15 @@ final public class SguRssLoader extends AsyncTaskLoader<List<Article>> {
                 Article article = new Article();
                 article.title = cursor.getString(0);
                 article.description = cursor.getString(1);
-                article.pubDate = cursor.getString(2);
+
+                //article.pubDate = cursor.getString(2);
+                article.pubDate = new Date(cursor.getInt(2));
+
                 article.link = cursor.getString(3);
                 article.favourite = cursor.getInt(4);
                 article.imageUrl = cursor.getString(5);
                 article.guid = cursor.getLong(6);
+                article.type = 0;
 
                 res.add(article);
             }
@@ -63,6 +70,35 @@ final public class SguRssLoader extends AsyncTaskLoader<List<Article>> {
             cursor.close();
             db.close();
         }
+
+        List<Date> days = new ArrayList<>();
+        for (int i = 0; i < res.size(); i++) {
+            boolean isAlreadyAdded = false;
+            for (int j = 0; j < days.size(); j++) {
+                if (res.get(i).pubDate.getDate() == days.get(j).getDate()) {
+                    isAlreadyAdded = true;
+                    break;
+                }
+            }
+            if (!isAlreadyAdded) {
+                days.add(res.get(i).pubDate);
+            }
+        }
+        if (!days.isEmpty()) {
+            for (int i = 0; i < res.size(); i++) {
+                if (days.isEmpty()) {
+                    break;
+                }
+                if (res.get(i).pubDate.equals(days.get(0))) {
+                    Article article = new Article();
+                    article.pubDate = days.get(0);
+                    article.type = 1;
+                    res.add(i, article);
+                }
+                days.remove(res.get(i).pubDate);
+            }
+        }
+
         Log.d(LOG_TAG, "load finished");
         return res;
     }

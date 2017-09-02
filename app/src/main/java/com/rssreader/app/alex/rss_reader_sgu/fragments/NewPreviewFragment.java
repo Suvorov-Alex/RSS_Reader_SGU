@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import java.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ import com.bumptech.glide.Glide;
 import com.rssreader.app.alex.rss_reader_sgu.R;
 import com.rssreader.app.alex.rss_reader_sgu.db.SguDbContract;
 import com.rssreader.app.alex.rss_reader_sgu.db.SguDbHelper;
+
+import java.text.ParseException;
 
 public class NewPreviewFragment extends Fragment {
 
@@ -127,9 +130,13 @@ public class NewPreviewFragment extends Fragment {
                 descriptionTextView.setText(cursor.getString(
                         cursor.getColumnIndex(SguDbContract.COLUMN_DESCRIPTION)));
                 //descriptionTextView.setMovementMethod(new ScrollingMovementMethod());
-                String[] formatMonth = formatMonth(cursor);
-                pubDateTextView.setText(
-                        formatMonth[0] + " " + formatMonth[1] + ", " + formatMonth[2]);
+                //String[] formatMonth = formatMonth(cursor);
+                try {
+                    pubDateTextView.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(cursor.getString(
+                            cursor.getColumnIndex(SguDbContract.COLUMN_PUBDATE))).toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
