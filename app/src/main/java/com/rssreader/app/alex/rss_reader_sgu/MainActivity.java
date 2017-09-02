@@ -1,9 +1,7 @@
 package com.rssreader.app.alex.rss_reader_sgu;
 
 import android.app.Fragment;
-import android.content.ContentValues;
 import android.content.res.Configuration;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,9 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.rssreader.app.alex.rss_reader_sgu.db.SguDbContract;
 import com.rssreader.app.alex.rss_reader_sgu.fragments.FavouriteNewsListFragment;
 import com.rssreader.app.alex.rss_reader_sgu.fragments.FavouriteNewsListFragmentContainer;
 import com.rssreader.app.alex.rss_reader_sgu.fragments.NewPreviewFragment;
@@ -25,7 +21,6 @@ import com.rssreader.app.alex.rss_reader_sgu.fragments.NewsListFragmentContainer
 import com.rssreader.app.alex.rss_reader_sgu.fragments.PrefsFragment;
 import com.rssreader.app.alex.rss_reader_sgu.fragments.UpdateFrequencyFragment;
 import com.rssreader.app.alex.rss_reader_sgu.model.Article;
-
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,

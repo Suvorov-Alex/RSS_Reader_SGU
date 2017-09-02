@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -16,10 +15,6 @@ import com.rssreader.app.alex.rss_reader_sgu.R;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-/**
- * Created by Alex on 09.08.2017.
- */
 
 public class MultiItemNewsAdapter extends BaseAdapter {
 

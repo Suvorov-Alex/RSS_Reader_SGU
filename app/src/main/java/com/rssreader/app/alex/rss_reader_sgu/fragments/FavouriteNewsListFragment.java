@@ -28,10 +28,6 @@ import com.rssreader.app.alex.rss_reader_sgu.service.RefreshService;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Alex on 21.07.2017.
- */
-
 public class FavouriteNewsListFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<List<Article>> {
     private static final String LOG_TAG = "NewsListActivity";

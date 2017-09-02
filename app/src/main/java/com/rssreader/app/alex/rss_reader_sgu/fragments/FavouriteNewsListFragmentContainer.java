@@ -10,10 +10,6 @@ import android.view.ViewGroup;
 
 import com.rssreader.app.alex.rss_reader_sgu.R;
 
-/**
- * Created by Alex on 21.07.2017.
- */
-
 public class FavouriteNewsListFragmentContainer extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -6,18 +6,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.util.Pair;
 
 import com.rssreader.app.alex.rss_reader_sgu.model.Article;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 final public class SguRssLoader extends AsyncTaskLoader<List<Article>> {
-
-    private static final String URL = "http://www.sgu.ru/news.xml";
     private static final String LOG_TAG = "SguRssLoader";
 
     private List<Article> data;

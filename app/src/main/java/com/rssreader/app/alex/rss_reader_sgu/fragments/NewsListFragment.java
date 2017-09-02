@@ -10,7 +10,6 @@ import android.content.Loader;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,14 +24,10 @@ import com.rssreader.app.alex.rss_reader_sgu.R;
 import com.rssreader.app.alex.rss_reader_sgu.db.SguRssLoader;
 import com.rssreader.app.alex.rss_reader_sgu.model.Article;
 import com.rssreader.app.alex.rss_reader_sgu.model.MultiItemNewsAdapter;
-import com.rssreader.app.alex.rss_reader_sgu.model.NewsItemAdapter;
 import com.rssreader.app.alex.rss_reader_sgu.service.RefreshService;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 public class NewsListFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<List<Article>> {

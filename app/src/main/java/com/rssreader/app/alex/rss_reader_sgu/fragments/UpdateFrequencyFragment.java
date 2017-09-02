@@ -20,10 +20,6 @@ import com.rssreader.app.alex.rss_reader_sgu.service.RefreshService;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * Created by Alex on 29.07.2017.
- */
-
 public class UpdateFrequencyFragment extends Fragment {
     private RadioButton radioBtn2;
     private RadioButton radioBtn3;

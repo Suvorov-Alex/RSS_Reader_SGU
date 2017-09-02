@@ -2,7 +2,6 @@ package com.rssreader.app.alex.rss_reader_sgu.fragments;
 
 import android.app.Fragment;
 import android.content.ContentValues;
-import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.text.SimpleDateFormat;
@@ -61,8 +60,6 @@ public class NewPreviewFragment extends Fragment {
 
         return v;
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

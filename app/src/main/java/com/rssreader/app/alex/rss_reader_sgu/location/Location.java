@@ -10,10 +10,6 @@ import java.util.Date;
 
 import static android.content.Context.LOCATION_SERVICE;
 
-/**
- * Created by Alex on 02.08.2017.
- */
-
 public class Location {
     private static final String LOCATION_TAG = "LocationLog";
 
