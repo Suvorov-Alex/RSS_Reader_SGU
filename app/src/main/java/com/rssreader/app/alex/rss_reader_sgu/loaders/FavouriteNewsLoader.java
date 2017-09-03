@@ -1,4 +1,4 @@
-package com.rssreader.app.alex.rss_reader_sgu.db;
+package com.rssreader.app.alex.rss_reader_sgu.loaders;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.rssreader.app.alex.rss_reader_sgu.db.SguDbContract;
+import com.rssreader.app.alex.rss_reader_sgu.db.SguDbHelper;
 import com.rssreader.app.alex.rss_reader_sgu.model.Article;
 
 import java.util.ArrayList;
@@ -13,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 
 final public class FavouriteNewsLoader extends AsyncTaskLoader<List<Article>> {
-    private static final String URL = "http://www.sgu.ru/news.xml";
     private static final String LOG_TAG = "SguRssLoader";
 
     private List<Article> data;
@@ -50,10 +51,8 @@ final public class FavouriteNewsLoader extends AsyncTaskLoader<List<Article>> {
                     Article article = new Article();
                     article.title = cursor.getString(0);
                     article.description = cursor.getString(1);
-
-                    //article.pubDate = cursor.getString(2);
-                    article.pubDate = new Date(cursor.getInt(2));
-
+                    long intDate = cursor.getLong(2);
+                    article.pubDate = new Date(intDate);
                     article.link = cursor.getString(3);
                     article.favourite = cursor.getInt(4);
                     article.imageUrl = cursor.getString(5);

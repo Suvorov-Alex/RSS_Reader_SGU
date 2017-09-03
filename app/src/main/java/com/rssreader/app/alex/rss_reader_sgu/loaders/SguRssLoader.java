@@ -1,4 +1,4 @@
-package com.rssreader.app.alex.rss_reader_sgu.db;
+package com.rssreader.app.alex.rss_reader_sgu.loaders;
 
 
 import android.content.AsyncTaskLoader;
@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.rssreader.app.alex.rss_reader_sgu.db.SguDbContract;
+import com.rssreader.app.alex.rss_reader_sgu.db.SguDbHelper;
 import com.rssreader.app.alex.rss_reader_sgu.model.Article;
 
 import java.util.ArrayList;

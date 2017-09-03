@@ -21,7 +21,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.rssreader.app.alex.rss_reader_sgu.R;
-import com.rssreader.app.alex.rss_reader_sgu.db.FavouriteNewsLoader;
+import com.rssreader.app.alex.rss_reader_sgu.loaders.FavouriteNewsLoader;
 import com.rssreader.app.alex.rss_reader_sgu.model.Article;
 import com.rssreader.app.alex.rss_reader_sgu.model.MultiItemNewsAdapter;
 import com.rssreader.app.alex.rss_reader_sgu.service.RefreshService;
