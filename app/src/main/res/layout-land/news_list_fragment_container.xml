@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/news_list_fragment"
-        class="com.rssreader.app.alex.rss_reader_sgu.fragments.NewsListFragment"
+        class="com.rssreader.app.alex.rss_reader_sgu.ui.fragment.NewsListFragment"
         android:layout_width="256dp"
         android:layout_height="match_parent" />
 
     <fragment
         android:id="@+id/new_preview_fragment"
-        class="com.rssreader.app.alex.rss_reader_sgu.fragments.NewPreviewFragment"
+        class="com.rssreader.app.alex.rss_reader_sgu.ui.fragment.NewPreviewFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent" />
 

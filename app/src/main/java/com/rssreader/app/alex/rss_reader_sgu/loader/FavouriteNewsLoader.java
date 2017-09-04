@@ -1,5 +1,4 @@
-package com.rssreader.app.alex.rss_reader_sgu.loaders;
-
+package com.rssreader.app.alex.rss_reader_sgu.loader;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
@@ -15,12 +14,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-final public class SguRssLoader extends AsyncTaskLoader<List<Article>> {
+final public class FavouriteNewsLoader extends AsyncTaskLoader<List<Article>> {
     private static final String LOG_TAG = "SguRssLoader";
 
     private List<Article> data;
 
-    public SguRssLoader(Context context) {
+    public FavouriteNewsLoader(Context context) {
         super(context);
     }
 
@@ -43,24 +42,22 @@ final public class SguRssLoader extends AsyncTaskLoader<List<Article>> {
                 SguDbContract.COLUMN_PUBDATE,
                 SguDbContract.COLUMN_LINK,
                 SguDbContract.COLUMN_FAVOURITE,
-                SguDbContract.COLUMN_IMAGE_URL,
-                SguDbContract.COLUMN_GUID
+                SguDbContract.COLUMN_IMAGE_URL
         }, null, null, null, null, SguDbContract.COLUMN_PUBDATE + " DESC");
         try {
             res = new ArrayList<>();
             while (cursor.moveToNext()) {
-                Article article = new Article();
-                article.title = cursor.getString(0);
-                article.description = cursor.getString(1);
-                long intDate = cursor.getLong(2);
-                article.pubDate = new Date(intDate);
-                article.link = cursor.getString(3);
-                article.favourite = cursor.getInt(4);
-                article.imageUrl = cursor.getString(5);
-                article.guid = cursor.getLong(6);
-                article.type = 0;
-
-                res.add(article);
+                if (cursor.getInt(4) == 1) {
+                    Article article = new Article();
+                    article.title = cursor.getString(0);
+                    article.description = cursor.getString(1);
+                    long intDate = cursor.getLong(2);
+                    article.pubDate = new Date(intDate);
+                    article.link = cursor.getString(3);
+                    article.favourite = cursor.getInt(4);
+                    article.imageUrl = cursor.getString(5);
+                    res.add(article);
+                }
             }
         } finally {
             cursor.close();
@@ -94,7 +91,6 @@ final public class SguRssLoader extends AsyncTaskLoader<List<Article>> {
                 days.remove(res.get(i).pubDate);
             }
         }
-
         Log.d(LOG_TAG, "load finished");
         return res;
     }

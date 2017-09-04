@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rssreader.app.alex.rss_reader_sgu.MainActivity">
+    tools:context="com.rssreader.app.alex.rss_reader_sgu.ui.activity.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

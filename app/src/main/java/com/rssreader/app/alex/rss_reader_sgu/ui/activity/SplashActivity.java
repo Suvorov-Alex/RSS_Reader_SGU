@@ -1,9 +1,11 @@
-package com.rssreader.app.alex.rss_reader_sgu;
+package com.rssreader.app.alex.rss_reader_sgu.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.rssreader.app.alex.rss_reader_sgu.R;
 
 public class SplashActivity extends Activity {
     @Override

@@ -1,4 +1,4 @@
-package com.rssreader.app.alex.rss_reader_sgu;
+package com.rssreader.app.alex.rss_reader_sgu.ui.activity;
 
 import android.app.Fragment;
 import android.content.res.Configuration;
@@ -13,13 +13,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.rssreader.app.alex.rss_reader_sgu.fragments.FavouriteNewsListFragment;
-import com.rssreader.app.alex.rss_reader_sgu.fragments.FavouriteNewsListFragmentContainer;
-import com.rssreader.app.alex.rss_reader_sgu.fragments.NewPreviewFragment;
-import com.rssreader.app.alex.rss_reader_sgu.fragments.NewsListFragment;
-import com.rssreader.app.alex.rss_reader_sgu.fragments.NewsListFragmentContainer;
-import com.rssreader.app.alex.rss_reader_sgu.fragments.PrefsFragment;
-import com.rssreader.app.alex.rss_reader_sgu.fragments.UpdateFrequencyFragment;
+import com.rssreader.app.alex.rss_reader_sgu.R;
+import com.rssreader.app.alex.rss_reader_sgu.ui.fragment.FavouriteNewsListFragment;
+import com.rssreader.app.alex.rss_reader_sgu.ui.fragment.FavouriteNewsListFragmentContainer;
+import com.rssreader.app.alex.rss_reader_sgu.ui.fragment.NewPreviewFragment;
+import com.rssreader.app.alex.rss_reader_sgu.ui.fragment.NewsListFragment;
+import com.rssreader.app.alex.rss_reader_sgu.ui.fragment.NewsListFragmentContainer;
+import com.rssreader.app.alex.rss_reader_sgu.ui.fragment.PrefsFragment;
+import com.rssreader.app.alex.rss_reader_sgu.ui.fragment.UpdateFrequencyFragment;
 import com.rssreader.app.alex.rss_reader_sgu.model.Article;
 
 public class MainActivity extends AppCompatActivity

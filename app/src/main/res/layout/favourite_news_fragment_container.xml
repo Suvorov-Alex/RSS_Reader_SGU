@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/news_list_fragment"
-        class="com.rssreader.app.alex.rss_reader_sgu.fragments.FavouriteNewsListFragment"
+        class="com.rssreader.app.alex.rss_reader_sgu.ui.fragment.FavouriteNewsListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
